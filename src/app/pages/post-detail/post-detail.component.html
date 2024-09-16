@@ -1,0 +1,41 @@
+<div *ngIf="isLoading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+<div *ngIf="post" class="flex flex-col gap-4 mt-4">
+  <a
+    routerLink="/posts"
+    class="font-bold border-4 flex justify-center items-center border-transparent duration-75 bg-indigo-900 text-white active:bg-transparent active:text-indigo-950 w-12 h-12 rounded-full active:border-indigo-900"
+  >
+    <span class="material-symbols-outlined"> arrow_back </span>
+  </a>
+  <div class="w-full flex justify-start items-start gap-4">
+    <div
+      class="w-[70%] flex flex-col justify-start items-start gap-4 p-4"
+    >
+      <h2 class="text-3xl font-black text-indigo-800">{{ post.title }}</h2>
+      <p class="mt-4 text-base">{{ post.body }}</p>
+      <a
+        class="font-bold border-4 flex justify-center items-center border-transparent duration-75 bg-slate-200 text-slate-800 active:bg-transparent active:text-indigo-950 gap-1 px-12 py-4 rounded-full active:border-indigo-900"
+      >
+        <span class="material-symbols-outlined text-base"> chat_bubble </span>
+        <p class="scale-75 -mt-1">{{ comments.length }}</p>
+      </a>
+    </div>
+    <div
+      class="w-[30%] bg-slate-50 shadow-md flex flex-col gap-4 justify-end items-end"
+    >
+      <div *ngIf="comments.length === 0">
+        <p>No comments available.</p>
+      </div>
+
+      <div *ngIf="comments.length > 0">
+        <ul class="flex flex-col gap-4">
+          <li *ngFor="let comment of comments" class="border flex flex-col gap-1 p-4  rounded-xl">
+            <strong class="italic">{{ comment.email }}</strong> 
+            <p class="text-indigo-600">({{ comment.name }})</p>
+            <p>{{ comment.body }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

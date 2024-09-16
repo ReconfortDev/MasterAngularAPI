@@ -1,0 +1,42 @@
+<main>
+  <h2 class="text-xl font-bold mb-4">See All Posts</h2>
+  <div
+    class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+    *ngIf="posts"
+  >
+    <div
+      *ngFor="let post of posts"
+      class="p-8 pb-4 border-2 border-transparent hover:border-slate-200 bg-slate-100 hover:bg-transparent duration-150 rounded-lg cursor-pointer relative z-0 group"
+    >
+      <h3 [routerLink]="['/post', post.id]" class="text-lg font-bold mt-4 group-hover:text-indigo-600">{{ post.title }}</h3>
+      <p>{{ post.body }}</p>
+      <div class="flex gap-2 items-center mt-4" *ngIf="isLoggedIn">
+        <a
+        [routerLink]="['/edit-post', post.id]"
+          class="font-bold border-4 flex justify-center items-center border-transparent text-red-600 duration-75 hover:bg-red-900 hover:text-white active:bg-transparent active:text-indigo-950 w-8 h-8 rounded-full active:border-red-900 cursor-pointer hover:scale-150"
+        >
+          <span class="material-symbols-outlined text-base"> edit </span>
+        </a>
+
+        <a
+        (click)="deletePost(post.id)"
+          class="font-bold border-4 flex justify-center items-center border-transparent text-indigo-600 duration-75 hover:bg-indigo-900 hover:text-white active:bg-transparent active:text-indigo-950 w-8 h-8 rounded-full active:border-indigo-900 cursor-pointer hover:scale-150 relative z-10"
+        >
+          <span class="material-symbols-outlined text-base"> delete </span>
+        </a>
+      </div>
+    </div>
+  </div>
+    <app-navigation
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (pageChanged)="onPageChanged($event)"
+    >
+    </app-navigation>
+  <div
+    class="w-full flex justify-center items-center text-xl font-bold"
+    *ngIf="!posts"
+  >
+    No post available!!
+  </div>
+</main>

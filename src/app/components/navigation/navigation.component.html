@@ -1,0 +1,33 @@
+<div class="flex gap-4 items-center mt-4 justify-center md:justify-end">
+  <button
+    (click)="previousPage()"
+    [disabled]="currentPage === 1"
+    class="px-6 py-3 text-sm bg-indigo-400 text-white font-semibold rounded-full hidden md:block"
+  >
+    Previous
+  </button>
+
+  <div class="flex gap-[1px] items">
+    <button
+      class="!px-4 md:!px-6 !py-3 text-sm font-semibold duration-200"
+      *ngFor="let page of getPages(); let i = index"
+      (click)="selectPage(page)"
+      [ngClass]="{
+        'bg-indigo-500 text-white': page === currentPage,
+        'bg-gray-200 text-black hover:bg-gray-300': page !== currentPage,
+        'rounded-l-full': i === 0,
+        'rounded-r-full': i === getPages().length - 1
+      }"
+    >
+      {{ page }}
+    </button>
+  </div>
+
+  <button
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPages"
+    class="px-6 py-3 text-sm bg-indigo-400 text-white font-semibold rounded-full hidden md:block"
+  >
+    Next
+  </button>
+</div>
