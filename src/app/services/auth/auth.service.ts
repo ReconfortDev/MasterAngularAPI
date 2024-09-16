@@ -19,7 +19,7 @@ export class AuthService {
       const token = 'mock-token-12345';
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      window.location.replace('/posts');
+      window.location.replace('/');
 
       return true;
     } else {
