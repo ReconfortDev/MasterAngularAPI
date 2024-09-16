@@ -1,27 +1,100 @@
-# MasterAngularAPI
+# My Angular Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
+## Description
 
-## Development server
+This Angular project includes a client service to interact with a JSONPlaceholder API. It fetches posts, comments, and user information, and demonstrates basic CRUD operations, sorting, and error handling.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+- **Posts**: Fetch, create, update, and delete posts. Posts are sorted by ID in descending order.
+- **Comments**: Retrieve comments associated with a specific post.
+- **Users**: Fetch and display user information.
+- **Error Handling**: Graceful handling of API errors.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
 
-## Build
+To get started with this project, follow these steps:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisites
 
-## Running unit tests
+- [Node.js](https://nodejs.org/) (>= 14.x)
+- [Angular CLI](https://angular.io/cli) (>= 15.x)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Clone the Repository
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/ReconfortDev/MasterAngularAPI
+cd MasterAngularAPI
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Install Dependencies
 
-## Further help
+```bash
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Configuration
+
+### API Endpoints
+
+This project interacts with the [JSONPlaceholder API](https://jsonplaceholder.typicode.com/). The base URL for the API is set in the `ApiClientService`:
+
+```typescript
+private apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+private commentsUrl = 'https://jsonplaceholder.typicode.com/comments';
+private usersUrl = 
+    [
+    {
+      "username": "user1",
+      "password": "password1"
+    },
+    {
+      "username": "user2",
+      "password": "password2"
+    },
+    {
+      "username": "user3",
+      "password": "password3"
+    }
+  ]
+  
+```
+
+## Usage
+
+### Running the Application
+
+To start the development server, use:
+
+```bash
+ng serve
+```
+
+Navigate to `http://localhost:4200/` in your browser to view the application.
+
+### Fetching Posts
+
+Posts are fetched from the JSONPlaceholder API and sorted by ID in descending order. To get posts, use the `getPosts` method in the `ApiClientService`.
+
+### Fetching Comments
+
+Comments for a specific post can be fetched using the `fetchComments` method. This method filters comments based on the `postId`.
+
+
+## API Client Service
+
+The `ApiClientService` provides methods for interacting with the API:
+
+```typescript
+getPosts(page: number, limit: number): Observable<Post[]>;
+getPost(id: number): Observable<Post>;
+createPost(post: Post): Observable<Post>;
+updatePost(post: Post): Observable<Post>;
+deletePost(id: number): Observable<void>;
+getCommentsForPost(postId: number): Observable<Comment[]>;
+getUser(id: number): Observable<User>;
+```
+
+## Error Handling
+
+Errors are handled gracefully using the `handleError` method, which logs errors and provides user-friendly messages.
